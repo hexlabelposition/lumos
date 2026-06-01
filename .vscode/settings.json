@@ -10,5 +10,8 @@
   // Enable quick suggestions for strings to get Tailwind CSS class name suggestions
   "editor.quickSuggestions": {
     "strings": "on"
-  }
+  },
+
+  // Enable type-only auto imports for JavaScript and TypeScript
+  "js/ts.preferences.preferTypeOnlyAutoImports": true
 }
