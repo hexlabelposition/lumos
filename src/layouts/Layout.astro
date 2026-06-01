@@ -3,14 +3,16 @@ import { Font } from "astro:assets";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <Font cssVariable="--font-inter" preload />
   </head>
-  <body class="font-sans">
+  <body
+    class="bg-white font-sans leading-tight tracking-tight text-black antialiased"
+  >
     <slot />
   </body>
 </html>
