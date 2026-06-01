@@ -5,3 +5,32 @@
   /* The font is provided by Google Fonts provider */
   --font-sans: var(--font-inter);
 }
+
+@theme {
+  /* Reset default colors */
+  --color-*: initial;
+
+  /* Define custom colors */
+  /* Basic */
+  --color-white: #ffffff;
+  --color-black: #09090b;
+
+  /* Primary */
+  --color-primary-0: #fff7ed;
+  --color-primary-25: #ffd6a7;
+  --color-primary-50: #ff8904;
+  --color-primary-100: #f54900;
+  --color-primary-200: #9f2d00;
+  --color-primary-300: #441306;
+
+  /* Greyscale */
+  --color-grey-0: #fafafa;
+  --color-grey-25: #f4f4f5;
+  --color-grey-50: #e4e4e7;
+  --color-grey-100: #d4d4d8;
+  --color-grey-200: #9f9fa9;
+  --color-grey-300: #71717b;
+  --color-grey-400: #52525c;
+  --color-grey-500: #3f3f46;
+  --color-grey-600: #18181b;
+}
