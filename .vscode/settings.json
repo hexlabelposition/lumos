@@ -1,0 +1,14 @@
+{
+  // Set Prettier as the default formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Enable associations so that all .css files are treated as Tailwind CSS
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // Enable quick suggestions for strings to get Tailwind CSS class name suggestions
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+}
