@@ -1,1 +1,7 @@
 @import "tailwindcss";
+
+@theme inline {
+  /* The “--font-inter” variable is passed from the root layout */
+  /* The font is provided by Google Fonts provider */
+  --font-sans: var(--font-inter);
+}

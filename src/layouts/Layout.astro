@@ -1,11 +1,16 @@
+---
+import { Font } from "astro:assets";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <Font cssVariable="--font-inter" preload />
   </head>
-  <body>
+  <body class="font-sans">
     <slot />
   </body>
 </html>
