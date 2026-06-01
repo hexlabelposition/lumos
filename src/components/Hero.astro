@@ -1,0 +1,94 @@
+---
+import { Image } from "astro:assets";
+import heroImage from "@/assets/images/hero.jpg";
+
+interface StatisticItem {
+  label: string;
+  value: number | string;
+}
+
+type StatisticArray = Array<StatisticItem>;
+
+const statistics: StatisticArray = [
+  {
+    label: "successful projects",
+    value: 100,
+  },
+  {
+    label: "clients worldwide",
+    value: 50,
+  },
+  {
+    label: "years of experience",
+    value: 5,
+  },
+  {
+    label: "client satisfaction",
+    value: 95,
+  },
+];
+---
+
+<section
+  id="hero"
+  aria-labelledby="hero-title"
+  class="px-5 py-12 lg:px-14 lg:py-8 xl:px-20"
+>
+  <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-2 lg:gap-10">
+    <div class="flex lg:items-center lg:justify-center">
+      <div class="flex flex-col gap-4 lg:gap-6">
+        <h1
+          id="hero-title"
+          class="text-3xl font-medium text-balance sm:text-4xl lg:text-6xl xl:text-7xl"
+        >
+          Crafting digital experiences that inspire & convert
+        </h1>
+        <p class="text-grey-300 leading-normal lg:text-lg">
+          We blend design, technology, and strategy to create stunning digital
+          products that drive real results.
+        </p>
+
+        <div class="flex flex-col gap-2 sm:flex-row">
+          <a
+            href="#"
+            class="bg-primary-100 inline-flex min-h-12 items-center justify-center rounded-3xl px-4 text-white"
+            >Let's talk now</a
+          >
+          <a
+            href="#"
+            class="border-grey-50 inline-flex min-h-12 items-center justify-center rounded-3xl border bg-white px-4 text-black"
+            >View our works</a
+          >
+        </div>
+
+        <dl
+          class="bg-grey-0 grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-2 rounded-2xl p-4 lg:gap-6"
+        >
+          {
+            statistics.map(({ label, value }) => (
+              <div class="border-grey-50 flex flex-col-reverse gap-2 rounded-2xl border bg-white p-2">
+                <dt class="text-xs">{label}</dt>
+                <dd class="text-xl font-medium lg:text-3xl">
+                  {value.toString().concat("+")}
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <div class="max-h-64 overflow-hidden rounded-3xl sm:max-h-96 lg:max-h-full">
+      <Image
+        role="presentation"
+        src={heroImage}
+        alt=""
+        loading="eager"
+        decoding="sync"
+        layout="full-width"
+        fetchpriority="high"
+        class="size-full object-cover object-center"
+      />
+    </div>
+  </div>
+</section>
