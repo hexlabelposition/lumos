@@ -1,0 +1,80 @@
+---
+import AirbnbIcon from "@/assets/icons/customers/airbnb.svg";
+import GoogleIcon from "@/assets/icons/customers/google.svg";
+import MicrosoftIcon from "@/assets/icons/customers/microsoft.svg";
+import SpotifyIcon from "@/assets/icons/customers/spotify.svg";
+import CanvaIcon from "@/assets/icons/customers/canva.svg";
+import MashableIcon from "@/assets/icons/customers/mashable.svg";
+import type { SvgComponent } from "astro/types";
+
+interface CustomerItem {
+  name: string;
+  href: string;
+  Icon: SvgComponent;
+}
+
+type CustomerArray = Array<CustomerItem>;
+
+const customers: CustomerArray = [
+  {
+    name: "Airbnb",
+    href: "https://www.airbnb.com/",
+    Icon: AirbnbIcon,
+  },
+  {
+    name: "Google",
+    href: "https://www.google.com/",
+    Icon: GoogleIcon,
+  },
+  {
+    name: "Microsoft",
+    href: "https://www.microsoft.com/",
+    Icon: MicrosoftIcon,
+  },
+  {
+    name: "Spotify",
+    href: "https://www.spotify.com/",
+    Icon: SpotifyIcon,
+  },
+  {
+    name: "Canva",
+    href: "https://www.canva.com/",
+    Icon: CanvaIcon,
+  },
+  {
+    name: "Mashable",
+    href: "https://mashable.com/",
+    Icon: MashableIcon,
+  },
+];
+---
+
+<section
+  id="customers"
+  class="border-grey-50 mask-fade-x mx-auto w-full max-w-7xl overflow-clip border-y py-8"
+>
+  <ul
+    class="animate-marquee hover:pause-animation flex w-max items-center justify-center gap-12 pr-12 lg:gap-22 lg:pr-22"
+  >
+    {
+      // Duplicate the customer list to create a seamless marquee effect
+      Array.from({ length: 2 }).flatMap((_, index) =>
+        customers.map(({ name, href, Icon }) => (
+          <li aria-hidden={index > 0 ? "true" : undefined}>
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabindex={index === 0 ? 0 : -1}
+            >
+              <Icon
+                class="min-h-8 grayscale transition-[filter] duration-300 hover:grayscale-0 lg:min-h-10"
+                aria-label={index === 0 ? name : undefined}
+              />
+            </a>
+          </li>
+        )),
+      )
+    }
+  </ul>
+</section>

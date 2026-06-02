@@ -33,4 +33,41 @@
   --color-grey-400: #52525c;
   --color-grey-500: #3f3f46;
   --color-grey-600: #18181b;
+
+  /* Animations */
+  --animate-marquee: marquee 20s linear infinite;
+
+  /* Keyframes */
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@utility mask-fade-x {
+  /* Default */
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+
+  /* Webkit / Safari */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
+}
+
+@utility pause-animation {
+  animation-play-state: paused;
 }
