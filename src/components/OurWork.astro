@@ -1,0 +1,119 @@
+---
+import { Image } from "astro:assets";
+import ArrowRightIcon from "@/assets/icons/ui/arrow-right.svg";
+import coffeeBrandImage from "@/assets/images/artisanal-coffee-brand.jpg";
+import dashboardImage from "@/assets/images/saas-dashboard-ui.jpg";
+import petshopRebrandImage from "@/assets/images/petshop-rebrand.jpg";
+import ecommerceRedesignImage from "@/assets/images/ecommerce-store-redesign.jpg";
+import type { ImageMetadata } from "astro";
+
+interface ProjectItem {
+  title: string;
+  description: string;
+  image: {
+    src: ImageMetadata;
+    alt: string;
+  };
+  href: string;
+}
+
+type ProjectArray = Array<ProjectItem>;
+
+const projects: ProjectArray = [
+  {
+    title: "E-commerce store redesign",
+    description: "Increased conversions by 35%.",
+    image: {
+      src: ecommerceRedesignImage,
+      alt: "Redesign of an e-commerce store, showcasing a modern and user-friendly interface that increased conversions by 35%.",
+    },
+    href: "https://unsplash.com/photos/macbook-pro-on-top-of-brown-wooden-table-during-daytime-KiEiI2b9GkU",
+  },
+  {
+    title: "Artisanal coffee brand",
+    description: "Warm, handcrafted design approach.",
+    image: {
+      src: coffeeBrandImage,
+      alt: "Packaging design for an artisanal coffee brand, featuring warm tones and handcrafted typography.",
+    },
+    href: "https://www.magnific.com/free-psd/white-paper-bag-takeaway-food-metal-table_417616739.htm#fromView=search&page=1&position=4&uuid=2e22d015-36f8-44c9-88c1-cf74990f433b&query=coffee+brand",
+  },
+  {
+    title: "SaaS dashboard UI",
+    description: "Intuitive user flows for better engagement.",
+    image: {
+      src: dashboardImage,
+      alt: "User interface design for a SaaS dashboard, showcasing intuitive user flows and engagement features.",
+    },
+    href: "https://unsplash.com/photos/laptop-computer-on-glass-top-table-hpjSkU2UYSU",
+  },
+  {
+    title: "Petshop rebrand",
+    description: "Minimalist, warm and elegant rebrand.",
+    image: {
+      src: petshopRebrandImage,
+      alt: "Rebranding design for a petshop, featuring minimalist and elegant visuals.",
+    },
+    href: "https://www.magnific.com/free-vector/fashion-accessory-logo-template-business-branding-design-vector_20346298.htm#fromView=search&page=2&position=24&uuid=7d6c7bbf-5b22-4dae-b775-51a72e876424&query=Pet+logo+brand",
+  },
+];
+---
+
+<section
+  id="our-work"
+  aria-labeldby="our-work-title"
+  class="bg-grey-0 px-5 py-12 lg:py-20"
+>
+  <div class="mx-auto flex max-w-7xl flex-col gap-8 lg:gap-12">
+    <header class="mx-auto flex max-w-4xl flex-col gap-4 text-center lg:gap-6">
+      <div class="flex flex-col gap-2">
+        <span class="text-grey-200 text-sm uppercase lg:text-base"
+          >Our Work</span
+        >
+        <h2
+          id="our-work-title"
+          class="text-4xl leading-tight font-medium tracking-tight text-balance md:text-5xl lg:text-6xl"
+        >
+          Bringing ideas to life through design and technology
+        </h2>
+      </div>
+      <p class="text-grey-300 text-sm text-balance lg:text-base">
+        Discover some of the projects we&apos;ve created for brands that embrace
+        innovation.
+      </p>
+    </header>
+    <ul
+      class="grid grid-cols-[repeat(auto-fit,minmax(min(400px,100%),1fr))] gap-6 lg:grid-cols-2"
+    >
+      {
+        projects.map(({ title, description, image, href }) => (
+          <li class="flex flex-col gap-4">
+            <div class="aspect-335/240 overflow-hidden rounded-2xl lg:aspect-628/367">
+              <Image
+                {...image}
+                width={628}
+                height={367}
+                layout="full-width"
+                class="size-full object-cover"
+              />
+            </div>
+
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-medium lg:text-xl">{title}</h3>
+                <p class="text-grey-300 text-sm lg:text-base">{description}</p>
+              </div>
+
+              <a
+                href={href}
+                class="border-grey-50 inline-flex size-12 items-center justify-center rounded-full border"
+              >
+                <ArrowRightIcon class="size-5 stroke-black lg:size-6" />
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
