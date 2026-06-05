@@ -1,0 +1,125 @@
+---
+import LogoIcon from "@/assets/icons/ui/logo.svg";
+import LocationIcon from "@/assets/icons/ui/location.svg";
+import MailIcon from "@/assets/icons/ui/mail.svg";
+import PhoneIcon from "@/assets/icons/ui/phone.svg";
+import XIcon from "@/assets/icons/socials/twitter-x.svg";
+import LinkedInIcon from "@/assets/icons/socials/linkedin.svg";
+import InstagramIcon from "@/assets/icons/socials/instagram.svg";
+import BehanceIcon from "@/assets/icons/socials/behance.svg";
+import type { SvgComponent } from "astro/types";
+
+interface ContactItem {
+  title: string;
+  href: string;
+  Icon: SvgComponent;
+}
+
+type ContactArray = Array<ContactItem>;
+
+const contacts: ContactArray = [
+  {
+    title: "Samarinda, Indonesia",
+    href: "https://google.com/maps?q=Samarinda,+Indonesia",
+    Icon: LocationIcon,
+  },
+  {
+    title: "hello@lumoscreative.com",
+    href: "mailto:hello@lumoscreative.com",
+    Icon: MailIcon,
+  },
+  {
+    title: "+123 456 7890",
+    href: "tel:+1234567890",
+    Icon: PhoneIcon,
+  },
+];
+
+interface SocialItem {
+  title: string;
+  href: string;
+  Icon: SvgComponent;
+}
+
+type SocialArray = Array<SocialItem>;
+
+const socials: SocialArray = [
+  {
+    title: "Twitter",
+    href: "https://www.x.com",
+    Icon: XIcon,
+  },
+  {
+    title: "LinkedIn",
+    href: "https://www.linkedin.com",
+    Icon: LinkedInIcon,
+  },
+  {
+    title: "Instagram",
+    href: "https://www.instagram.com",
+    Icon: InstagramIcon,
+  },
+  {
+    title: "Behance",
+    href: "https://www.behance.net",
+    Icon: BehanceIcon,
+  },
+];
+---
+
+<footer id="footer" class="px-5 pt-8 lg:pt-14">
+  <div class="mx-auto flex max-w-7xl flex-col gap-12 lg:gap-20">
+    <div class="flex flex-col justify-between gap-12 lg:flex-row">
+      <div class="flex max-w-xl flex-col gap-4">
+        <a href="#hero" class="inline-flex items-center gap-2">
+          <LogoIcon class="fill-primary-100 h-5" />
+          <span class="font-semibold lg:text-lg">Lumos</span>
+        </a>
+        <p class="text-grey-300 text-sm lg:text-base">
+          Lumos Creative is a digital agency dedicated to crafting impactful
+          designs and seamless digital experiences. Let's bring your vision to
+          life.
+        </p>
+      </div>
+
+      <ul class="flex flex-col gap-2 text-sm lg:text-base">
+        {
+          contacts.map(({ title, href, Icon }) => (
+            <li>
+              <a href={href} class="inline-flex gap-2">
+                <Icon class="h-5 w-5" />
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex flex-col gap-4">
+        <h3 class="text-sm font-medium lg:text-base">Social Media</h3>
+        <ul class="flex gap-2">
+          {
+            socials.map(({ title, href, Icon }) => (
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-primary-100 inline-flex size-9 items-center justify-center overflow-hidden rounded-full"
+                >
+                  <Icon class="h-5 w-5 fill-white" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-grey-100 border-t py-4 text-center">
+      <p class="text-grey-300 text-xs lg:text-sm">
+        &copy; 2026 Lumos Creative. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
