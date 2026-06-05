@@ -1,0 +1,184 @@
+---
+import LogoIcon from "@/assets/icons/ui/logo.svg";
+import MenuIcon from "@/assets/icons/ui/menu.svg";
+import ArrowRightIcon from "@/assets/icons/ui/arrow-right.svg";
+
+interface NavigationItem {
+  name: string;
+  href: string;
+}
+
+type NavigationArray = Array<NavigationItem>;
+
+const navigation: NavigationArray = [
+  { name: "Home", href: "#hero" },
+  { name: "Why Choose Us", href: "#why-choose-us" },
+  { name: "Services", href: "#our-services" },
+  { name: "Our Work", href: "#our-work" },
+  { name: "Testimonials", href: "#testimonials" },
+];
+---
+
+<header
+  id="header"
+  class="border-grey-50 sticky top-0 z-50 h-17 border-b bg-white px-5"
+>
+  <div
+    id="header-bar"
+    class="mx-auto flex h-full max-w-7xl items-center justify-between"
+  >
+    <a href="#hero" class="inline-flex items-center gap-2">
+      <LogoIcon class="fill-primary-100 h-5" />
+      <span class="font-semibold lg:text-lg">Lumos</span>
+    </a>
+
+    <nav class="hidden lg:block">
+      <ul class="text-grey-200 flex items-center gap-8">
+        {
+          navigation.map(({ name, href }) => (
+            <li>
+              <a href={href} class="text-sm font-medium lg:text-base">
+                {name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a
+      href="#contact-us"
+      class="bg-primary-100 hidden h-9 items-center gap-1 rounded-3xl px-3 lg:flex"
+    >
+      <span class="text-sm font-medium text-white lg:text-base">Contact Us</span
+      >
+      <ArrowRightIcon class="size-5 stroke-white" />
+    </a>
+
+    <button
+      id="open-menu"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+      class="flex items-center lg:hidden"
+    >
+      <MenuIcon aria-hidden="true" class="size-6 stroke-black" />
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Navigation menu"
+    hidden
+    class="fixed inset-0 z-50 flex flex-col bg-white lg:hidden"
+  >
+    <div
+      class="border-grey-50 flex h-17 shrink-0 items-center justify-between border-b px-5"
+    >
+      <a href="#hero" class="inline-flex items-center gap-2">
+        <LogoIcon class="fill-primary-100 h-5" />
+        <span class="font-semibold">Lumos</span>
+      </a>
+      <button id="close-menu" aria-label="Close menu" class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <path d="M6 6l12 12M6 18L18 6"></path>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="flex flex-1 flex-col justify-center px-5">
+      <ul class="flex flex-col gap-2 text-center">
+        {
+          navigation.map(({ name, href }) => (
+            <li>
+              <a href={href} class="block py-3 text-xl font-medium">
+                {name}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex shrink-0 justify-center px-5 pb-8">
+      <a
+        href="#contact-us"
+        class="bg-primary-100 flex h-12 items-center justify-center gap-1 rounded-3xl px-4"
+      >
+        <span class="font-medium text-white">Contact Us</span>
+        <ArrowRightIcon class="size-5 stroke-white" />
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const openBtn = document.getElementById("open-menu") as HTMLButtonElement;
+  const closeBtn = document.getElementById("close-menu") as HTMLButtonElement;
+  const menu = document.getElementById("mobile-menu") as HTMLDivElement;
+  const headerBar = document.getElementById("header-bar") as HTMLDivElement;
+  const main = document.querySelector("main") as HTMLElement;
+
+  function openMenu() {
+    menu.hidden = false;
+    openBtn.setAttribute("aria-expanded", "true");
+    document.documentElement.classList.add("overflow-hidden");
+    headerBar.inert = true;
+    if (main) main.inert = true;
+    closeBtn.focus();
+  }
+
+  function closeMenu() {
+    menu.hidden = true;
+    openBtn.setAttribute("aria-expanded", "false");
+    document.documentElement.classList.remove("overflow-hidden");
+    headerBar.inert = false;
+    if (main) main.inert = false;
+    openBtn.focus();
+  }
+
+  function trapFocus(e: KeyboardEvent) {
+    if (e.key === "Escape") {
+      closeMenu();
+      return;
+    }
+    if (e.key !== "Tab") return;
+
+    const focusable = Array.from(
+      menu.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  openBtn.addEventListener("click", openMenu);
+  closeBtn.addEventListener("click", closeMenu);
+  menu.addEventListener("keydown", trapFocus);
+
+  // Close on nav link click
+  menu.querySelectorAll("a[href]").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+</script>

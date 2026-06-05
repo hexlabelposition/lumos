@@ -1,9 +1,10 @@
 ---
 import { Font } from "astro:assets";
+import Header from "@/components/Header.astro";
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-pt-17 scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -13,6 +14,11 @@ import { Font } from "astro:assets";
   <body
     class="bg-white font-sans leading-tight tracking-tight text-black antialiased"
   >
-    <slot />
+    <div class="flex min-h-svh flex-col">
+      <Header />
+      <div class="flex-1">
+        <slot />
+      </div>
+    </div>
   </body>
 </html>
