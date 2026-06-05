@@ -1,6 +1,7 @@
 ---
 import LogoIcon from "@/assets/icons/ui/logo.svg";
 import MenuIcon from "@/assets/icons/ui/menu.svg";
+import CloseIcon from "@/assets/icons/ui/close.svg";
 import ArrowRightIcon from "@/assets/icons/ui/arrow-right.svg";
 
 interface NavigationItem {
@@ -37,7 +38,10 @@ const navigation: NavigationArray = [
         {
           navigation.map(({ name, href }) => (
             <li>
-              <a href={href} class="text-sm font-medium lg:text-base">
+              <a
+                href={href}
+                class="text-sm font-medium transition-colors duration-300 hover:text-black lg:text-base"
+              >
                 {name}
               </a>
             </li>
@@ -83,18 +87,7 @@ const navigation: NavigationArray = [
         <span class="font-semibold">Lumos</span>
       </a>
       <button id="close-menu" aria-label="Close menu" class="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          aria-hidden="true"
-        >
-          <path d="M6 6l12 12M6 18L18 6"></path>
-        </svg>
+        <CloseIcon aria-hidden="true" class="size-6 stroke-black" />
       </button>
     </div>
 
@@ -103,7 +96,7 @@ const navigation: NavigationArray = [
         {
           navigation.map(({ name, href }) => (
             <li>
-              <a href={href} class="block py-3 text-xl font-medium">
+              <a href={href} class="block py-3 text-lg font-medium">
                 {name}
               </a>
             </li>
@@ -181,4 +174,37 @@ const navigation: NavigationArray = [
   menu.querySelectorAll("a[href]").forEach((link) => {
     link.addEventListener("click", closeMenu);
   });
+
+  // Active section highlighting
+  const headerEl = document.getElementById("header") as HTMLElement;
+  const desktopNavLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("#header-bar nav a[href^='#']"),
+  );
+
+  const sectionMap = desktopNavLinks
+    .map((link) => ({
+      link,
+      el: document.getElementById(link.getAttribute("href")!.slice(1)),
+    }))
+    .filter((item): item is { link: HTMLAnchorElement; el: HTMLElement } =>
+      item.el !== null,
+    );
+
+  function updateActiveLink() {
+    const headerH = headerEl.offsetHeight;
+    let activeLink: HTMLAnchorElement | null = null;
+
+    for (const { link, el } of sectionMap) {
+      if (el.getBoundingClientRect().top <= headerH + 1) {
+        activeLink = link;
+      }
+    }
+
+    for (const { link } of sectionMap) {
+      link.classList.toggle("text-black", link === activeLink);
+    }
+  }
+
+  window.addEventListener("scroll", updateActiveLink, { passive: true });
+  updateActiveLink();
 </script>
