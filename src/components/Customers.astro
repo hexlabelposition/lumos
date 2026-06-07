@@ -67,9 +67,10 @@ const customers: CustomerArray = [
               rel="noopener noreferrer"
               tabindex={index === 0 ? 0 : -1}
             >
+              <span class="sr-only">{name}</span>
               <Icon
+                aria-hidden="true"
                 class="min-h-8 grayscale transition-[filter] duration-300 hover:grayscale-0 lg:min-h-10"
-                aria-label={index === 0 ? name : undefined}
               />
             </a>
           </li>
