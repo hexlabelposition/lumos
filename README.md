@@ -2,7 +2,7 @@
 
 A landing page for a fictional digital agency, created as a personal project. The focus is on a clean design, accessibility, and performance.
 
-> **Live demo:** coming soon on GitHub Pages
+> **Live demo:** [https://hexlabelposition.github.io/lumos/](https://hexlabelposition.github.io/lumos/)
 
 ![Lumos preview](.github/preview.png)
 
