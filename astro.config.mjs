@@ -24,4 +24,6 @@ export default defineConfig({
       // weights: [] Don't use. Variable font!
     },
   ],
+  site: "https://hexlabelposition.github.io",
+  base: "/lumos/",
 });
