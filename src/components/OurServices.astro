@@ -1,0 +1,105 @@
+---
+import BrushIcon from "@/assets/icons/ui/brush.svg";
+import PenNibIcon from "@/assets/icons/ui/pen-nib.svg";
+import SuitcaseIcon from "@/assets/icons/ui/suitcase.svg";
+import WebsiteIcon from "@/assets/icons/ui/website.svg";
+import ArrowRightIcon from "@/assets/icons/ui/arrow-right.svg";
+import type { SvgComponent } from "astro/types";
+
+interface ServiceItem {
+  number: string;
+  title: string;
+  description: string;
+  Icon: SvgComponent;
+}
+
+type ServiceArray = Array<ServiceItem>;
+
+const services: ServiceArray = [
+  {
+    number: "01",
+    title: "Branding & identity",
+    description:
+      "We craft unique brand identities that capture your vision and resonate with your audience. ",
+    Icon: BrushIcon,
+  },
+  {
+    number: "02",
+    title: "Website & UI/UX design",
+    description:
+      "We design visually stunning and user-friendly websites that enhance engagement and drive conversions. ",
+    Icon: PenNibIcon,
+  },
+  {
+    number: "03",
+    title: "Digital marketing",
+    description:
+      "Our data-driven strategies help businesses grow online. We ensure your brand reaches the right audience effectively.",
+    Icon: SuitcaseIcon,
+  },
+  {
+    number: "04",
+    title: "Web development",
+    description:
+      "We build fast, secure, and scalable websites tailored to your needs. We ensure your site performs flawlessly across all devices.",
+    Icon: WebsiteIcon,
+  },
+];
+---
+
+<section
+  id="our-services"
+  aria-labelledby="our-services-title"
+  class="bg-black px-5 py-12 text-white lg:py-20"
+>
+  <div class="mx-auto flex max-w-7xl flex-col gap-8 lg:gap-12">
+    <header class="flex max-w-3xl flex-col gap-4 lg:gap-6">
+      <div class="flex flex-col gap-2">
+        <span class="text-grey-100 text-sm uppercase lg:text-base"
+          >Our Services</span
+        >
+        <h2 class="text-4xl font-medium lg:text-6xl">
+          Comprehensive digital solutions for your brand
+        </h2>
+      </div>
+      <p class="text-grey-100 text-sm lg:text-base">
+        From branding to web development, we create impactful experiences that
+        connect and convert.
+      </p>
+    </header>
+
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
+      {
+        services.map(({ number, title, description, Icon }) => (
+          <li class="bg-grey-600 relative flex flex-col justify-between gap-8 overflow-hidden rounded-3xl p-8">
+            <div class="flex flex-col gap-8">
+              <div
+                aria-hidden="true"
+                class="flex flex-row-reverse justify-between"
+              >
+                <span class="text-grey-400 text-lg font-medium">{number}</span>
+                <div class="bg-grey-500 inline-flex size-12 items-center justify-center rounded-full">
+                  <Icon class="size-6 fill-white" />
+                </div>
+              </div>
+              <div class="flex flex-col gap-4">
+                <h3 class="text-xl font-medium">{title}</h3>
+                <p class="text-grey-100 text-sm lg:text-base">{description}</p>
+              </div>
+            </div>
+            <a
+              href="mailto:hello@lumoscreative.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-primary-100 inline-flex items-center gap-2 text-sm font-medium lg:text-base"
+            >
+              Let's talk now
+              <ArrowRightIcon class="stroke-primary-100 size-4 lg:size-6" />
+            </a>
+            <Icon class="absolute right-0 bottom-0 size-40 translate-x-1/4 translate-y-1/4 transform fill-white opacity-5" />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

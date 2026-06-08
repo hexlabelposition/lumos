@@ -1,46 +1,72 @@
-# Astro Starter Kit: Basics
+# Lumos - Digital Agency
 
-```sh
-bun create astro@latest -- --template basics
+A landing page for a fictional digital agency, created as a personal project. The focus is on a clean design, accessibility, and performance.
+
+> **Live demo:** coming soon on GitHub Pages
+
+![Lumos preview](.github/preview.png)
+
+## Tech Stack
+
+- [Astro](https://astro.build/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/) (strict mode)
+
+## Getting Started
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/hexlabelposition/lumos.git
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Navigate to the project directory:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```bash
+cd lumos
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Install dependencies:
 
-## 🧞 Commands
+```bash
+bun install
+```
 
-All commands are run from the root of the project, from a terminal:
+Start the development server
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+```bash
+bun run dev
+```
 
-## 👀 Want to learn more?
+## Scripts
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+| Command           | Description               |
+| ----------------- | ------------------------- |
+| `bun run dev`     | Start development server  |
+| `bun run build`   | Build for production      |
+| `bun run preview` | Preview production build  |
+| `bun run format`  | Format code with Prettier |
+
+## Performance
+
+Tested with Lighthouse:
+
+| Category       | Score |
+| -------------- | ----- |
+| Performance    | 100   |
+| Accessibility  | 95    |
+| Best Practices | 100   |
+| SEO            | 100   |
+
+## Design
+
+Based on a paid UI kit, reimplemented from scratch as a learning exercise.
+
+- Design: [Lumos - Digital Agency Landing Page UI Kit](https://ui8.net/anandafaristd/products/lumos---digital-agency-landing-page-ui-kit)
+- Author: [anandafaristd](https://ui8.net/anandafaristd/products)
+
+All design rights belong to the original author. This project is for educational purposes only and is not intended for commercial use.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

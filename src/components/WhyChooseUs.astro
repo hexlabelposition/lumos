@@ -1,0 +1,69 @@
+---
+import LightBulbIcon from "@/assets/icons/ui/light-bulb.svg";
+import SparkleIcon from "@/assets/icons/ui/sparkle.svg";
+import BarChartIcon from "@/assets/icons/ui/bar-chart.svg";
+import type { SvgComponent } from "astro/types";
+
+interface ReasonItem {
+  title: string;
+  description: string;
+  Icon: SvgComponent;
+}
+
+type ReasonArray = Array<ReasonItem>;
+
+const reasons: ReasonArray = [
+  {
+    title: "Innovation-driven",
+    description: "Unique digital experiences tailored to your brand's needs.",
+    Icon: LightBulbIcon,
+  },
+  {
+    title: "Stunning design",
+    description: "Visually compelling aesthetics that enhance engagement.",
+    Icon: SparkleIcon,
+  },
+  {
+    title: "Strategic growth",
+    description: "Digital solutions designed for conversion and scalability.",
+    Icon: BarChartIcon,
+  },
+];
+---
+
+<section
+  id="why-choose-us"
+  aria-labelledby="why-choose-us-title"
+  class="mx-auto flex w-full max-w-7xl flex-col gap-8 px-5 py-12 lg:gap-12 lg:py-20"
+>
+  <header class="mx-auto flex max-w-2xl flex-col gap-4 text-center lg:gap-6">
+    <div class="flex flex-col gap-2">
+      <span class="text-grey-200 text-sm uppercase lg:text-base"
+        >Why Choose Us</span
+      >
+      <h2
+        id="why-choose-us-title"
+        class="text-4xl font-medium text-balance md:text-5xl lg:text-6xl"
+      >
+        We turn creativity into measurable success
+      </h2>
+    </div>
+    <p class="text-grey-300 text-sm text-balance lg:text-base">
+      Our approach blends innovation, design, and strategy to craft solutions
+      that not only look great but also drive results.
+    </p>
+  </header>
+  <ul class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+    {
+      reasons.map(({ title, description, Icon }) => (
+        <li class="bg-grey-0 mx-auto flex flex-col gap-4 rounded-2xl p-8">
+          <Icon aria-hidden="true" class="fill-primary-100 size-5 lg:size-8" />
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-medium xl:text-xl">{title}</h3>
+            <p class="text-grey-300 text-sm lg:text-base">{description}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

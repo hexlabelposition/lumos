@@ -1,0 +1,207 @@
+---
+import { Image } from "astro:assets";
+import CanvaIcon from "@/assets/icons/customers/canva.svg";
+import MashableIcon from "@/assets/icons/customers/mashable.svg";
+import SpotifyIcon from "@/assets/icons/customers/spotify.svg";
+import ArrowRightIcon from "@/assets/icons/ui/arrow-right.svg";
+import ArrowLeftIcon from "@/assets/icons/ui/arrow-left.svg";
+import type { SvgComponent } from "astro/types";
+
+interface TestimonialItem {
+  title: string;
+  description: string;
+  company: {
+    name: string;
+    Icon: SvgComponent;
+  };
+  user: {
+    name: string;
+    role: string;
+    avatar: {
+      src: string;
+      alt: string;
+    };
+  };
+}
+
+type TestimonialArray = Array<TestimonialItem>;
+
+const testimonials: TestimonialArray = [
+  {
+    title: "Lumos is a game-changer!",
+    description:
+      "Working with Lumos Creative was a game-changer for our brand. Since launching our new site, we've seen a significant increase in engagement and conversions. If you're looking for a creative team that understands both design and strategy, Lumos Creative is the perfect choice!",
+    company: {
+      name: "Canva",
+      Icon: CanvaIcon,
+    },
+    user: {
+      name: "Alex Telles",
+      role: "Founder of NovaTech",
+      avatar: {
+        src: "https://images.unsplash.com/photo-1654110455429-cf322b40a906?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8YXZhdGFyfGVufDB8fDB8fHww",
+        alt: "Avatar of Alex Telles, Founder of NovaTech, who provided a testimonial for Lumos Creative.",
+      },
+    },
+  },
+  {
+    title: "Professional and creative from start to finish",
+    description:
+      "Lumos Creative helped us completely rethink our online presence. Their team was responsive, thoughtful, and incredibly skilled. The final result exceeded our expectations and gave our brand a fresh, modern identity.",
+    company: {
+      name: "Mashable",
+      Icon: MashableIcon,
+    },
+    user: {
+      name: "Maria Johnson",
+      role: "Marketing Director at BrightWave",
+      avatar: {
+        src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        alt: "Avatar of Maria Johnson, Marketing Director at BrightWave, who provided a testimonial for Lumos Creative.",
+      },
+    },
+  },
+  {
+    title: "They delivered real business impact",
+    description:
+      "From strategy to design, Lumos Creative guided us through every step with clarity and confidence. After launch, we saw stronger lead quality and improved user engagement across key pages. We would gladly partner with them again.",
+    company: {
+      name: "Spotify",
+      Icon: SpotifyIcon,
+    },
+    user: {
+      name: "Daniel Kim",
+      role: "CEO at Horizon Labs",
+      avatar: {
+        src: "https://images.unsplash.com/photo-1697283528996-a4975dfc5a9d?q=80&w=746&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        alt: "Avatar of Daniel Kim, CEO at Horizon Labs, who provided a testimonial for Lumos Creative.",
+      },
+    },
+  },
+];
+---
+
+<section
+  id="testimonials"
+  aria-labelledby="testimonials-title"
+  class="gap-8 px-5 py-12 lg:py-20"
+>
+  <div class="mx-auto flex max-w-7xl flex-col gap-8 lg:gap-12">
+    <header class="mx-auto flex max-w-xl flex-col gap-4 text-center lg:gap-6">
+      <div class="flex flex-col gap-2">
+        <span class="text-grey-200 text-sm uppercase lg:text-base"
+          >Testimonials</span
+        >
+        <h2
+          id="testimonials-title"
+          class="text-4xl font-medium text-balance md:text-5xl lg:text-6xl"
+        >
+          What our clients say about us
+        </h2>
+      </div>
+      <p class="text-grey-300 text-sm text-balance lg:text-base">
+        We build lasting partnerships by delivering outstanding results.
+      </p>
+    </header>
+
+    <div class="lg:mask-fade-x overflow-hidden">
+      <ul
+        id="testimonials-list"
+        class="relative flex transition-transform duration-500 ease-in-out"
+      >
+        {
+          testimonials.map(({ title, description, company, user }) => (
+            <li class="w-full shrink-0">
+              <div class="bg-grey-0 border-grey-100 mx-auto flex flex-col items-center gap-8 rounded-3xl border p-8 md:max-w-2xl lg:p-12 lg:px-20">
+                <company.Icon class="h-10" />
+                <h3 class="text-xl font-semibold lg:text-2xl">{title}</h3>
+                <p class="text-center italic lg:text-lg">"{description}"</p>
+                <div class="flex items-center gap-2">
+                  <Image
+                    width={48}
+                    height={48}
+                    {...user.avatar}
+                    class="size-12 rounded-full object-cover"
+                  />
+                  <div class="flex flex-col gap-1">
+                    <p class="font-medium lg:text-lg">{user.name}</p>
+                    <p class="text-grey-300 text-sm lg:text-base">
+                      {user.role}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="flex items-center justify-center gap-2">
+      <button
+        id="testimonials-prev"
+        aria-label="Previous testimonial"
+        class="border-grey-50 inline-flex size-12 items-center justify-center rounded-full border disabled:opacity-40"
+      >
+        <ArrowLeftIcon width={20} height={20} class="stroke-black lg:size-6" />
+      </button>
+
+      <button
+        id="testimonials-next"
+        aria-label="Next testimonial"
+        class="border-grey-50 inline-flex size-12 items-center justify-center rounded-full border disabled:opacity-40"
+      >
+        <ArrowRightIcon width={20} height={20} class="stroke-black lg:size-6" />
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const list = document.getElementById("testimonials-list") as HTMLUListElement;
+  const prevBtn = document.getElementById(
+    "testimonials-prev",
+  ) as HTMLButtonElement;
+  const nextBtn = document.getElementById(
+    "testimonials-next",
+  ) as HTMLButtonElement;
+
+  const total = list.children.length;
+  let current = 0;
+
+  const container = list.parentElement as HTMLElement;
+
+  function update() {
+    list.style.transform = `translateX(-${current * container.clientWidth}px)`;
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  const ro = new ResizeObserver(() => {
+    list.classList.remove("transition-transform");
+    update();
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(
+      () => list.classList.add("transition-transform"),
+      150,
+    );
+  });
+  ro.observe(container);
+
+  prevBtn.addEventListener("click", () => {
+    if (current > 0) {
+      current--;
+      update();
+    }
+  });
+
+  nextBtn.addEventListener("click", () => {
+    if (current < total - 1) {
+      current++;
+      update();
+    }
+  });
+
+  update();
+</script>

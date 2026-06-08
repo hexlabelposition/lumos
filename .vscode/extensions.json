@@ -1,4 +1,10 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": []
+  "recommendations": [
+    // Astro
+    "astro-build.astro-vscode",
+    // Prettier
+    "esbenp.prettier-vscode",
+    // Tailwind CSS IntelliSense
+    "bradlc.vscode-tailwindcss"
+  ]
 }
