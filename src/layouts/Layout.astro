@@ -5,7 +5,7 @@ import Footer from "@/components/Footer.astro";
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-pt-17 scroll-smooth">
+<html lang="en" class="scroll-pt-17 scrollbar-gutter-stable scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -32,9 +32,9 @@ import Footer from "@/components/Footer.astro";
   >
     <div class="flex min-h-svh flex-col">
       <Header />
-      <div class="flex-1">
+      <main class="flex-1">
         <slot />
-      </div>
+      </main>
       <Footer />
     </div>
   </body>

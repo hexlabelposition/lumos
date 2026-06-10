@@ -86,7 +86,10 @@ const socials: SocialArray = [
         {
           contacts.map(({ title, href, Icon }) => (
             <li>
-              <a href={href} class="inline-flex gap-2">
+              <a
+                href={href}
+                class="hover:text-grey-200 active:text-grey-200 inline-flex gap-2 transition-colors duration-300"
+              >
                 <Icon class="h-5 w-5" />
                 {title}
               </a>
@@ -105,7 +108,7 @@ const socials: SocialArray = [
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  class="bg-primary-100 inline-flex size-9 items-center justify-center overflow-hidden rounded-full"
+                  class="bg-primary-100 hover:bg-primary-200 active:bg-primary-200 inline-flex size-9 items-center justify-center overflow-hidden rounded-full transition-colors duration-300"
                 >
                   <span class="sr-only">{title}</span>
                   <Icon aria-hidden="true" class="h-5 w-5 fill-white" />

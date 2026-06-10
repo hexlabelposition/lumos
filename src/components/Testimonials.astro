@@ -107,7 +107,7 @@ const testimonials: TestimonialArray = [
     <div class="lg:mask-fade-x overflow-hidden">
       <ul
         id="testimonials-list"
-        class="relative flex transition-transform duration-500 ease-in-out"
+        class="relative flex gap-6 transition-transform duration-500 ease-in-out"
       >
         {
           testimonials.map(({ title, description, company, user }) => (
@@ -141,7 +141,7 @@ const testimonials: TestimonialArray = [
       <button
         id="testimonials-prev"
         aria-label="Previous testimonial"
-        class="border-grey-50 inline-flex size-12 items-center justify-center rounded-full border disabled:opacity-40"
+        class="border-grey-50 hover:bg-grey-50 active:bg-grey-50 inline-flex size-12 items-center justify-center rounded-full border transition-colors duration-300 disabled:pointer-events-none disabled:opacity-40"
       >
         <ArrowLeftIcon width={20} height={20} class="stroke-black lg:size-6" />
       </button>
@@ -149,7 +149,7 @@ const testimonials: TestimonialArray = [
       <button
         id="testimonials-next"
         aria-label="Next testimonial"
-        class="border-grey-50 inline-flex size-12 items-center justify-center rounded-full border disabled:opacity-40"
+        class="border-grey-50 hover:bg-grey-50 active:bg-grey-50 inline-flex size-12 items-center justify-center rounded-full border transition-colors duration-300 disabled:pointer-events-none disabled:opacity-40"
       >
         <ArrowRightIcon width={20} height={20} class="stroke-black lg:size-6" />
       </button>
@@ -172,7 +172,8 @@ const testimonials: TestimonialArray = [
   const container = list.parentElement as HTMLElement;
 
   function update() {
-    list.style.transform = `translateX(-${current * container.clientWidth}px)`;
+    const item = list.children[current] as HTMLElement;
+    list.style.transform = `translateX(-${item.offsetLeft}px)`;
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === total - 1;
   }

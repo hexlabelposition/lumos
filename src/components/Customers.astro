@@ -54,7 +54,7 @@ const customers: CustomerArray = [
   class="border-grey-50 mask-fade-x mx-auto w-full max-w-7xl overflow-clip border-y py-8"
 >
   <ul
-    class="animate-marquee hover:pause-animation flex w-max items-center justify-center gap-12 pr-12 lg:gap-22 lg:pr-22"
+    class="animate-marquee hover:pause-animation active:pause-animation flex w-max items-center justify-center gap-12 pr-12 lg:gap-22 lg:pr-22"
   >
     {
       // Duplicate the customer list to create a seamless marquee effect
@@ -70,7 +70,7 @@ const customers: CustomerArray = [
               <span class="sr-only">{name}</span>
               <Icon
                 aria-hidden="true"
-                class="min-h-8 grayscale transition-[filter] duration-300 hover:grayscale-0 lg:min-h-10"
+                class="min-h-8 grayscale transition-[filter] duration-300 hover:grayscale-0 active:grayscale-0 lg:min-h-10"
               />
             </a>
           </li>

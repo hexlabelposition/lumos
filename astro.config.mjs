@@ -25,5 +25,5 @@ export default defineConfig({
     },
   ],
   site: "https://hexlabelposition.github.io",
-  base: "/lumos/",
+  base: "/lumos",
 });

@@ -52,7 +52,7 @@ const navigation: NavigationArray = [
 
     <a
       href="#contact-us"
-      class="bg-primary-100 hidden h-9 items-center gap-1 rounded-3xl px-3 lg:flex"
+      class="bg-primary-100 hover:bg-primary-200 hidden h-9 items-center gap-1 rounded-3xl px-3 transition-colors duration-300 lg:flex"
     >
       <span class="text-sm font-medium text-white lg:text-base">Contact Us</span
       >
@@ -71,13 +71,10 @@ const navigation: NavigationArray = [
   </div>
 
   <!-- Mobile menu -->
-  <div
+  <dialog
     id="mobile-menu"
-    role="dialog"
-    aria-modal="true"
     aria-label="Navigation menu"
-    hidden
-    class="fixed inset-0 z-50 flex flex-col bg-white lg:hidden"
+    class="open:animate-menu-in [.is-closing]:animate-menu-out fixed inset-x-0 top-0 m-0 min-h-dvh w-full max-w-none flex-col bg-white p-0 transition-opacity duration-300 backdrop:hidden open:flex lg:hidden"
   >
     <div
       class="border-grey-50 flex h-17 shrink-0 items-center justify-between border-b px-5"
@@ -108,67 +105,53 @@ const navigation: NavigationArray = [
     <div class="flex shrink-0 justify-center px-5 pb-8">
       <a
         href="#contact-us"
-        class="bg-primary-100 flex h-12 items-center justify-center gap-1 rounded-3xl px-4"
+        class="bg-primary-100 active:bg-primary-200 hover:bg-primary-200 flex h-12 items-center justify-center gap-1 rounded-3xl px-4 transition-colors duration-300"
       >
         <span class="font-medium text-white">Contact Us</span>
         <ArrowRightIcon class="size-5 stroke-white" />
       </a>
     </div>
-  </div>
+  </dialog>
 </header>
 
 <script>
   const openBtn = document.getElementById("open-menu") as HTMLButtonElement;
   const closeBtn = document.getElementById("close-menu") as HTMLButtonElement;
-  const menu = document.getElementById("mobile-menu") as HTMLDivElement;
-  const headerBar = document.getElementById("header-bar") as HTMLDivElement;
-  const main = document.querySelector("main") as HTMLElement;
+  const menu = document.getElementById("mobile-menu") as HTMLDialogElement;
 
   function openMenu() {
-    menu.hidden = false;
-    openBtn.setAttribute("aria-expanded", "true");
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
     document.documentElement.classList.add("overflow-hidden");
-    headerBar.inert = true;
-    if (main) main.inert = true;
-    closeBtn.focus();
+    menu.showModal();
+    openBtn.setAttribute("aria-expanded", "true");
+    closeBtn.focus({ preventScroll: true });
   }
 
   function closeMenu() {
-    menu.hidden = true;
+    menu.classList.add("is-closing");
+  }
+
+  menu.addEventListener("animationend", (e) => {
+    if ((e.target as HTMLElement).closest("dialog") !== menu) return;
+    if (!menu.classList.contains("is-closing")) return;
+    menu.classList.remove("is-closing");
+    menu.close();
     openBtn.setAttribute("aria-expanded", "false");
     document.documentElement.classList.remove("overflow-hidden");
-    headerBar.inert = false;
-    if (main) main.inert = false;
-    openBtn.focus();
-  }
+    document.documentElement.style.paddingRight = "";
+    openBtn.focus({ preventScroll: true });
+  });
 
-  function trapFocus(e: KeyboardEvent) {
-    if (e.key === "Escape") {
-      closeMenu();
-      return;
-    }
-    if (e.key !== "Tab") return;
-
-    const focusable = Array.from(
-      menu.querySelectorAll<HTMLElement>(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      ),
-    );
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-
-    if (e.shiftKey && document.activeElement === first) {
-      e.preventDefault();
-      last.focus();
-    } else if (!e.shiftKey && document.activeElement === last) {
-      e.preventDefault();
-      first.focus();
-    }
-  }
+  // Intercept native Escape to use animated close
+  menu.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    closeMenu();
+  });
 
   openBtn.addEventListener("click", openMenu);
   closeBtn.addEventListener("click", closeMenu);
-  menu.addEventListener("keydown", trapFocus);
 
   // Close on nav link click
   menu.querySelectorAll("a[href]").forEach((link) => {
@@ -178,7 +161,9 @@ const navigation: NavigationArray = [
   // Active section highlighting
   const headerEl = document.getElementById("header") as HTMLElement;
   const desktopNavLinks = Array.from(
-    document.querySelectorAll<HTMLAnchorElement>("#header-bar nav a[href^='#']"),
+    document.querySelectorAll<HTMLAnchorElement>(
+      "#header-bar nav a[href^='#']",
+    ),
   );
 
   const sectionMap = desktopNavLinks
@@ -186,8 +171,9 @@ const navigation: NavigationArray = [
       link,
       el: document.getElementById(link.getAttribute("href")!.slice(1)),
     }))
-    .filter((item): item is { link: HTMLAnchorElement; el: HTMLElement } =>
-      item.el !== null,
+    .filter(
+      (item): item is { link: HTMLAnchorElement; el: HTMLElement } =>
+        item.el !== null,
     );
 
   function updateActiveLink() {
